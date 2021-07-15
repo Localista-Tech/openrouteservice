@@ -6,6 +6,55 @@ The repository and its branches:
 
 * The branch `localista` was branched from `master`. It is used as the main branch for the Localista Tech applications.
 
+## Config before using
+
+### OSM file
+
+1. Download the OSM file representing the area of your interest. Store it at `openrouteservice/docker/data`.
+2. At the `docker-compose.yml` file, update the argumento `OSM_FILE` with the path to your OSM file.
+
+## How to use
+
+**Attention:** Everytime the GraphHopper JARs at `openrouteservice/openrouteservice/libs/` are changed, the image must be built. This is because the JARs must be installed at the local Maven repository inside the container.
+
+To create and launch the ORS container, at `openrouteservice/docker` run:
+
+```
+$ docker-compose up -d
+```
+
+*It will build the image if it isn't available.*
+
+
+To force the building of the image when creating the container, at `openrouteservice/docker` run:
+
+```
+$ docker-compose up --build -d
+```
+
+To see the logs of the container:
+
+```
+$ docker logs -f ors-app
+```
+
+To access the container:
+
+```
+$ docker exec -it ors-app /bin/bash
+```
+
+To stop and remove the container, at `openrouteservice/docker` run:
+
+```
+$ docker-compose down
+```
+
+To ensure that no wierd behavior occurs when rebuilding the image, remove dangling or unused images after removing the containers:
+
+```
+docker image prune -a
+```
 
 -----
 
