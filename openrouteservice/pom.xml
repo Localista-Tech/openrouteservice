@@ -382,6 +382,9 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- Old dependencies -->
+        <!--
         <dependency>
             <groupId>com.github.GIScience.graphhopper</groupId>
             <artifactId>graphhopper-core</artifactId>
@@ -399,6 +402,8 @@
             <artifactId>graphhopper-api</artifactId>
             <version>v0.13.15</version>
         </dependency>
+        -->
+        <!-- Old dependencies - END -->
 
         <!-- remove the comment to enable debugging
         <dependency>
