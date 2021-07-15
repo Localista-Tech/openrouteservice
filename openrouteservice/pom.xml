@@ -382,6 +382,50 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Dependencies obtained from graphhopper-core's pom.xml -->
+        <dependency>
+            <groupId>ch.poole</groupId>
+            <artifactId>ConditionalRestrictionParser</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.poole</groupId>
+            <artifactId>OpeningHoursParser</artifactId>
+            <version>0.23.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.carrotsearch</groupId>
+            <artifactId>hppc</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>us.dustinj.timezonemap</groupId>
+            <artifactId>timezonemap</artifactId>
+            <version>3.2</version>
+        </dependency>
+
+        <!-- for using CGIAR: elevation data importing via tif files-->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>xmlgraphics-commons</artifactId>
+            <version>2.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Dependencies obtained from graphhopper-core's pom.xml - END -->
 
         <!-- GraphHopper custom -->
         <dependency>
