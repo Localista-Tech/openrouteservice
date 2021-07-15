@@ -9,7 +9,7 @@ services:
     build:
       context: ../
       args:
-        APP_CONFIG: ./openrouteservice/src/main/resources/app.config.sample
+        APP_CONFIG: ./docker/conf-localista/app.config.localista
         OSM_FILE: ./openrouteservice/src/main/files/heidelberg.osm.gz
     volumes:
       - ./graphs:/ors-core/data/graphs

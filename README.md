@@ -13,6 +13,16 @@ The repository and its branches:
 1. Download the OSM file representing the area of your interest. Store it at `openrouteservice/docker/data`.
 2. At the `docker-compose.yml` file, update the argumento `OSM_FILE` with the path to your OSM file.
 
+### `app.config`
+
+A default for ORS by Localista Tech can be found at `openrouteservice/docker/conf-localista/app.config.localista`.
+This file is copied to the Docker image when it is built, changed by what is defined at the Dockerfile and the end result stored at `openrouteservice/docker/conf/app.config`.
+
+The `app.config.localista` file can be changed before building the Docker image, but take into account the changes made to it by the Dockerfile when building the image.
+
+The `app.config` file can be changed after the container is created for the first time. Stop and relaunch the container and the file is loaded with the changes made to it.
+
+
 ## How to use
 
 **Attention:** Everytime the GraphHopper JARs at `openrouteservice/openrouteservice/libs/` are changed, the image must be built. This is because the JARs must be installed at the local Maven repository inside the container.
