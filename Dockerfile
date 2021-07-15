@@ -18,14 +18,29 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.39/bin/apache-t
     cd /tmp && \
     tar xvfz tomcat.tar.gz && \
     mkdir /usr/local/tomcat /ors-conf && \
-    cp -R /tmp/apache-tomcat-8.5.39/* /usr/local/tomcat/ && \
-    # Install dependencies and locales
-    apt-get update -qq && apt-get install -qq -y locales nano maven moreutils jq && \
-    locale-gen en_US.UTF-8 && \
+    cp -R /tmp/apache-tomcat-8.5.39/* /usr/local/tomcat/
+
+# Install dependencies and locales
+RUN apt-get update -qq && apt-get install -qq -y locales nano maven moreutils jq && \
+    locale-gen en_US.UTF-8
+
+# Install GraphHopper custom JARs
+RUN cd /ors-core/openrouteservice
+
+RUN echo "MAVEN: Installing GraphHopper - API package" && \
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/ors-core/openrouteservice/libs/graphhopper/graphhopper-api-0.13-SNAPSHOT.jar
+
+RUN echo "MAVEN: Installing GraphHopper - Core package" && \
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/ors-core/openrouteservice/libs/graphhopper/graphhopper-core-0.13-SNAPSHOT.jar
+
+RUN echo "MAVEN: Installing GraphHopper - Reader OSM package" && \
+    mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/ors-core/openrouteservice/libs/graphhopper/graphhopper-reader-osm-0.13-SNAPSHOT.jar
+
     # Rename to app.config
-    cp /ors-core/openrouteservice/src/main/resources/app.config.sample /ors-core/openrouteservice/src/main/resources/app.config && \
+RUN cp /ors-core/openrouteservice/src/main/resources/app.config.sample /ors-core/openrouteservice/src/main/resources/app.config
+
     # Replace paths in app.config to match docker setup
-    jq '.ors.services.routing.sources[0] = "data/osm_file.pbf"' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config && \
+RUN jq '.ors.services.routing.sources[0] = "data/osm_file.pbf"' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config && \
     jq '.ors.services.routing.profiles.default_params.elevation_cache_path = "data/elevation_cache"' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config && \
     jq '.ors.services.routing.profiles.default_params.graphs_root_path = "data/graphs"' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config && \
     # init_threads = 1, > 1 been reported some issues
