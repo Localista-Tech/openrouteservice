@@ -1,3 +1,18 @@
+# OpenRouteService - custom by Localista Tech
+
+This is a custom fork of OpenRouteService made by Localista Tech to be used with its applications.
+
+The repository and its branches:
+
+* The branch `localista` was branched from `master`. It is used as the main branch for the Localista Tech applications.
+
+
+-----
+
+*Original README from this point onwards.*
+
+-----
+
 # Openrouteservice
 
 [![Build Status](https://travis-ci.org/GIScience/openrouteservice.svg?branch=master)](https://travis-ci.org/GIScience/openrouteservice) 
