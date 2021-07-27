@@ -16,6 +16,7 @@ services:
         # Localista configs
         APP_CONFIG: ./docker/conf-localista/app.config.localista
         OSM_FILE: ./docker/data/portugal-latest.osm.pbf
+    image: localista-ors
     volumes:
       - ./graphs:/ors-core/data/graphs
       - ./elevation_cache:/ors-core/data/elevation_cache
