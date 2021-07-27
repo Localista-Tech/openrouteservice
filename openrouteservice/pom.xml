@@ -427,6 +427,14 @@
         </dependency>
         <!-- Dependencies obtained from graphhopper-core's pom.xml - END -->
 
+        <!-- Dependencies obtained from graphhopper-reader-osm's pom.xml -->
+        <dependency>
+            <groupId>org.openstreetmap.osmosis</groupId>
+            <artifactId>osmosis-osm-binary</artifactId>
+            <version>0.47</version>
+        </dependency>
+        <!-- Dependencies obtained from graphhopper-reader-osm's pom.xml - END -->
+
         <!-- GraphHopper custom -->
         <dependency>
             <groupId>com.graphhopper</groupId>
