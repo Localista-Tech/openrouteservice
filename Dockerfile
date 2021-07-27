@@ -24,6 +24,9 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.39/bin/apache-t
 RUN apt-get update -qq && apt-get install -qq -y locales nano maven moreutils jq && \
     locale-gen en_US.UTF-8
 
+# Install GDAL
+RUN apt-get install -qq -y gdal-bin
+
 # Install GraphHopper custom JARs
 RUN cd /ors-core/openrouteservice
 
@@ -45,8 +48,9 @@ RUN jq '.ors.services.routing.sources[0] = "data/osm_file.pbf"' /ors-core/openro
     jq '.ors.services.routing.profiles.default_params.graphs_root_path = "data/graphs"' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config && \
     # init_threads = 1, > 1 been reported some issues
     jq '.ors.services.routing.init_threads = 1' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config
+
     # Delete all profiles but car
-    # jq 'del(.ors.services.routing.profiles.active[1,2,3,4,5,6,7,8])' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config
+# RUN jq 'del(.ors.services.routing.profiles.active[1,2,3,4,5,6,7,8])' /ors-core/openrouteservice/src/main/resources/app.config |sponge /ors-core/openrouteservice/src/main/resources/app.config
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
